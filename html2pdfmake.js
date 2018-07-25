@@ -113,14 +113,14 @@ var html2pdfmake = function(html) {
             body: []
           }
         };
-        var border = e.getAttribute('pdf-border');
+        var border = e.getAttribute('data-pdfmake-layouts');
         var layouts = ['noBorders', 'headerLineOnly', 'lightHorizontalLines'];
         if (layouts.indexOf(border) > -1) {
           t.layout = border;
         }
         ParseContainer(t.table.body, e, p, styles);
 
-        var widths = e.getAttribute('pdf-widths');
+        var widths = e.getAttribute('data-pdfmake-widths');
         if (!widths) {
           if (t.table.body.length !== 0) {
             if (t.table.body[0].length !== 0) {
@@ -137,6 +137,7 @@ var html2pdfmake = function(html) {
         }
         cnt.push(t);
         break;
+      case 'thead':
       case 'tbody':
         ParseContainer(cnt, e, p, styles);
         break;
@@ -145,6 +146,7 @@ var html2pdfmake = function(html) {
         ParseContainer(row, e, p, styles);
         cnt.push(row);
         break;
+      case 'th':
       case 'td':
         p = CreateParagraph();
         var st = {
@@ -209,7 +211,7 @@ var html2pdfmake = function(html) {
     var div = document.createElement('div');
     if (typeof htmlText === "string") div.insertAdjacentHTML('beforeend', htmlText);
     else if (htmlText instanceof Element) {
-      div.insertAdjacentElement('beforeend', htmlText);
+      div.insertAdjacentElement('beforeend', htmlText.cloneNode(true));
     }
     [].forEach.call(div.childNodes, function(content) {
       if (content.nodeName.toLowerCase() === '#text') {

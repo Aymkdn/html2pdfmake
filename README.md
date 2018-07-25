@@ -15,9 +15,9 @@ If you want to **use with NodeJS**, then replace `var html2pdfmake = function(ht
 
 Example:
 ```html
-<table id="example">
-  <tr><th>Header</th></tr>
-  <tr><td>Cell 1</td></tr>
+<table id="example" data-pdfmake-layouts="noBorders" data-pdfmake-widths="50,'*'">
+  <tr><th>Header 1</th><th>Header 2</th></tr>
+  <tr><td>Cell 1</td><td>Cell 2</td></tr>
 </table>
 
 <script>
