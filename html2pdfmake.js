@@ -165,6 +165,9 @@ var html2pdfmake = function(html) {
 
         ParseContainer(st.stack, e, p, styles);
         cnt.push(st);
+        if (cspan) {
+          for (var i=0; i<st.colSpan-1; i++) cnt.push({});
+        }
         break;
       case 'div':
       case 'li':
